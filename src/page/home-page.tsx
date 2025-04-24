@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import CustomCounter from '../componet/custom-counter';
+import UserCard from '../componet/TASKS/user-card';
 
 const HomePage: React.FC = () => {
   const [count, setCount] = useState<number>(0);
@@ -21,7 +21,7 @@ const HomePage: React.FC = () => {
         textStyle={styles.textStyle}
       /> */}
       {/* <Counter /> */}
-      <CustomCounter
+      {/* <CustomCounter
         title={['+1', '+2', '-1', '-2', 'RESET']}
         count={count}
         noofButton={5}
@@ -32,7 +32,9 @@ const HomePage: React.FC = () => {
           () => setCount(count - 2),
           () => setCount(0),
         ]}
-      />
+      /> */}
+
+      <UserCard />
     </View>
   );
 };
