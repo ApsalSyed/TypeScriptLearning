@@ -34,7 +34,7 @@ const HomePage: React.FC = () => {
         ]}
       /> */}
 
-      <UserCard />
+      <UserCard age={20} name="Apsal" email="hello@gmail.com" showage={true} />
     </View>
   );
 };
