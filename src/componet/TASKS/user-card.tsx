@@ -2,31 +2,33 @@ import React from 'react';
 import {StyleSheet, Text, View, ViewStyle, TextStyle} from 'react-native';
 
 type User = {
-  name?: string;
-  email?: string;
-  age?: number;
+  name: string;
+  email: string;
+  age: number;
 };
 interface UserCardProps extends User {
   containerStyle?: ViewStyle;
   nameStyle?: TextStyle;
   emailStyle?: TextStyle;
   ageStyle?: TextStyle;
+  showage?: boolean;
 }
 
 const UserCard: React.FC<UserCardProps> = ({
   name = 'NAME',
   email = 'dummy@gmail.com',
-  age = '0',
+  age = 0,
   containerStyle,
   nameStyle,
   emailStyle,
   ageStyle,
+  showage = false,
 }) => {
   return (
     <View style={[styles.container, containerStyle]}>
       <Text style={[styles.name, nameStyle]}>{name}</Text>
       <Text style={[styles.email, emailStyle]}>{email}</Text>
-      <Text style={[styles.age, ageStyle]}>Age: {age}</Text>
+      {showage && <Text style={[styles.age, ageStyle]}>Age: {age}</Text>}
     </View>
   );
 };
