@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import TodoList from '../componet/TASKS/todo-list';
 
 const HomePage: React.FC = () => {
   const [count, setCount] = useState<number>(0);
@@ -35,7 +34,8 @@ const HomePage: React.FC = () => {
       /> */}
 
       {/* <UserCard age={20} name="Apsal" email="hello@gmail.com" showage={true} /> */}
-      <TodoList />
+      {/* <TodoList /> */}
+      {/* <LoginForm /> */}
     </View>
   );
 };
