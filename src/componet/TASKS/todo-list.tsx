@@ -1,19 +1,13 @@
 import React, {useState} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import {Checkbox} from 'react-native-paper';
-
-interface Todo {
-  id: number;
-  title: string;
-  completed: boolean;
-}
+import TodoItems, {Todo} from './todo-items';
 
 const TodoList = () => {
   const [todo, setTodo] = useState<Todo[]>([
     {id: 1, title: 'Trail', completed: false},
     {id: 2, title: 'Mountain', completed: false},
     {id: 3, title: 'Lake', completed: false},
-    {id: 4, title: 'Lake', completed: false},
+    {id: 4, title: 'Lake 2', completed: false},
   ]);
 
   const toggleCheckbox = (id: number) => {
@@ -29,16 +23,7 @@ const TodoList = () => {
       <Text style={styles.header}> Todo List</Text>
       {todo.map(item => (
         <View key={item.id} style={styles.todoItem}>
-          <View style={styles.row}>
-            <Checkbox
-              status={item.completed ? 'checked' : 'unchecked'}
-              onPress={() => toggleCheckbox(item.id)}
-            />
-            <Text
-              style={[styles.todoText, item.completed && styles.completedText]}>
-              {item.title}
-            </Text>
-          </View>
+          <TodoItems todo={item} toggleCheckbox={toggleCheckbox} />
         </View>
       ))}
     </View>
