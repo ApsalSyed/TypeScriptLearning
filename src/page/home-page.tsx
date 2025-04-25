@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import ProductWithSearch from '../componet/TASKS/product-search';
 
 const HomePage: React.FC = () => {
   const [count, setCount] = useState<number>(0);
+
   return (
     <View style={styles.container}>
       {/* <DetailAtom lable={123} desc={'asfvjha'} />
@@ -38,7 +38,27 @@ const HomePage: React.FC = () => {
       {/* <TodoList /> */}
       {/* <LoginForm /> */}
       {/* <ProductList /> */}
-      <ProductWithSearch />
+      {/* <ProductWithSearch /> */}
+
+      {/* <CustomInputField
+        label="Email"
+        value={email}
+        onChangeText={setEmail}
+        icon="email"
+        keyboardType="email-address"
+        required
+        isEmail
+      />
+      <CustomInputField
+        label="Password"
+        value={password}
+        onChangeText={setPassword}
+        icon="lock"
+        secureTextEntry
+        required
+        minLength={6}
+      /> */}
+      {/* <InputCustom lable={'Email'} /> */}
     </View>
   );
 };
