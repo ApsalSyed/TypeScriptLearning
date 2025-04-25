@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import ProductList from '../componet/TASKS/product-list';
+import ProductWithSearch from '../componet/TASKS/product-search';
 
 const HomePage: React.FC = () => {
   const [count, setCount] = useState<number>(0);
@@ -37,7 +37,8 @@ const HomePage: React.FC = () => {
       {/* <UserCard age={20} name="Apsal" email="hello@gmail.com" showage={true} /> */}
       {/* <TodoList /> */}
       {/* <LoginForm /> */}
-      <ProductList />
+      {/* <ProductList /> */}
+      <ProductWithSearch />
     </View>
   );
 };
