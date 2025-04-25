@@ -1,6 +1,14 @@
-import {useState} from 'react';
-import {FlatList, View} from 'react-native';
-import {Checkbox, Text, TextInput} from 'react-native-paper';
+import React, {useState} from 'react';
+import {FlatList, View, StyleSheet} from 'react-native';
+import {
+  Text,
+  TextInput,
+  Card,
+  Title,
+  Paragraph,
+  Divider,
+  SegmentedButtons,
+} from 'react-native-paper';
 
 interface ProductProps {
   name: string;
@@ -8,6 +16,7 @@ interface ProductProps {
   stock: boolean;
   id: number;
 }
+
 const PRODUCT: ProductProps[] = [
   {
     name: 'Apple 16 Pro',
@@ -30,61 +39,88 @@ const PRODUCT: ProductProps[] = [
   {
     name: 'OnePlus 8',
     price: 70,
-    stock: false,
+    stock: true,
     id: 4,
   },
 ];
-const ProductWithSearch = () => {
-  const [search, setSearch] = useState<string>('');
-  const [checked, setChecked] = useState<boolean>(false);
 
-  const filterProduct = PRODUCT.filter(item => {
-    const matcheSearch = item.name.toLowerCase().includes(search.toLowerCase());
-    const matchStock = item.stock === checked;
-    return matcheSearch && matchStock;
+const ProductWithSearch = () => {
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('all');
+
+  const filteredProducts = PRODUCT.filter(product => {
+    const matchesSearch = product.name
+      .toLowerCase()
+      .includes(search.toLowerCase());
+    const matchesStock =
+      filter === 'all' ||
+      (filter === 'inStock' ? product.stock : !product.stock);
+    return matchesSearch && matchesStock;
   });
 
-  const toggleCheckedFiter = () => {
-    setChecked(!checked);
-  };
-
-  const rederItem = ({item}: {item: ProductProps}) => {
-    return (
-      <View>
-        <Text>Model : {item.name}</Text>
-        <Text>Price : {item.price}</Text>
-        <Text>In Stock : {item.stock ? 'Yes' : 'No'}</Text>
-      </View>
-    );
-  };
+  const renderItem = ({item}: {item: ProductProps}) => (
+    <View>
+      <Card style={styles.card}>
+        <Card.Content>
+          <Title>{item.name}</Title>
+          <Paragraph>${item.price}</Paragraph>
+          <Paragraph style={{color: item.stock ? 'green' : 'red'}}>
+            {item.stock ? 'In Stock' : 'Out of Stock'}
+          </Paragraph>
+        </Card.Content>
+      </Card>
+    </View>
+  );
 
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput
-        placeholder="Search"
+        mode="outlined"
+        label="Search"
         value={search}
-        onChangeText={text => setSearch(text)}
+        onChangeText={setSearch}
+        style={styles.searchInput}
+        left={<TextInput.Icon icon="magnify" />}
       />
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Checkbox
-          status={checked ? 'checked' : 'unchecked'}
-          onPress={toggleCheckedFiter}
-        />
-        <Text>Only In Stock</Text>
-      </View>
-
-      <Text>Total : {filterProduct.length}</Text>
-      {filterProduct.length === 0 ? (
+      <SegmentedButtons
+        value={filter}
+        onValueChange={setFilter}
+        buttons={[
+          {value: 'all', label: 'All'},
+          {value: 'inStock', label: 'In Stock'},
+          {value: 'outOfStock', label: 'Out of Stock'},
+        ]}
+      />
+      <Text>Total: {filteredProducts.length}</Text>
+      <Divider style={{marginBottom: 10}} />
+      {filteredProducts.length === 0 ? (
         <Text>No Products Found</Text>
       ) : (
         <FlatList
-          data={filterProduct}
+          data={filteredProducts}
           keyExtractor={item => item.id.toString()}
-          renderItem={rederItem}
+          renderItem={renderItem}
+          contentContainerStyle={{paddingBottom: 20}}
         />
       )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+    backgroundColor: '#fff',
+    flex: 1,
+  },
+  searchInput: {
+    marginBottom: 12,
+  },
+  card: {
+    marginBottom: 12,
+    borderRadius: 8,
+    backgroundColor: '#f8f9fa',
+  },
+});
 
 export default ProductWithSearch;
