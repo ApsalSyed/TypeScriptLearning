@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
-import Signup from '../componet/TASKS/signup/signup';
+// import Signup from '../componet/TASKS/signup/signup';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import UsetList from './user-list';
 
 const HomePage: React.FC = () => {
   const [count, setCount] = useState<number>(0);
@@ -62,9 +63,10 @@ const HomePage: React.FC = () => {
       /> */}
       {/* <InputCustom lable={'Email'} /> */}
       {/* <View style={{flex: 1}}>
-        <LoginScreen />
+        <Signup />
       </View> */}
-      <Signup />
+
+      <UsetList />
     </SafeAreaView>
   );
 };

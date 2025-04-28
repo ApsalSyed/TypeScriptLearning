@@ -1,7 +1,7 @@
 import {useForm} from 'react-hook-form';
 import {View, StyleSheet} from 'react-native';
 import {Button, Text} from 'react-native-paper';
-import CustomInput from './custom-input';
+import CustomInput from '../componet/TASKS/login/custom-input';
 
 const LoginScreen = () => {
   const {control, handleSubmit} = useForm();
