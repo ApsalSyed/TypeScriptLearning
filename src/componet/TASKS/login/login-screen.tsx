@@ -1,128 +1,85 @@
-// import {useState} from 'react';
-// import {useForm} from 'react-hook-form';
-// import {View} from 'react-native';
-// import {Button, Text, TextInput} from 'react-native-paper';
-
 import {useForm} from 'react-hook-form';
-import {View} from 'react-native';
-import {Button} from 'react-native-paper';
+import {View, StyleSheet} from 'react-native';
+import {Button, Text} from 'react-native-paper';
 import CustomInput from './custom-input';
 
-// interface LoginForm {
-//   username: string;
-//   password: string;
-// }
-
-// const LoginScreen = () => {
-//   const [form, setForm] = useState<LoginForm>({
-//     username: '',
-//     password: '',
-//   });
-
-//   const hookForm = useForm<LoginForm>();
-//   return (
-//     <View style={{backgroundColor: 'lightgray', padding: 20}}>
-//       <Text>Login Screen</Text>
-//       <View style={{marginTop: 20}}>
-//         <TextInput
-//           label="Username"
-//           mode="outlined"
-//           value={form.username}
-//           onChangeText={text => setForm({...form, username: text})}
-//         />
-//       </View>
-
-//       <View style={{marginTop: 20}}>
-//         <TextInput
-//           label="Password"
-//           mode="outlined"
-//           value={form.password}
-//           onChangeText={text => setForm({...form, password: text})}
-//           secureTextEntry
-//         />
-//       </View>
-//       <View
-//         style={{
-//           marginTop: 20,
-//           justifyContent: 'space-between',
-//         }}>
-//         <Button
-//           // icon="camera"
-//           mode="elevated"
-//           onPress={() => console.log('Pressed')}>
-//           Press me
-//         </Button>
-//       </View>
-//     </View>
-//   );
-// };
-
-// export default LoginScreen;
-
 const LoginScreen = () => {
-  // const [form, setForm] = useState({
-  //   username: '',
-  //   password: '',
-  // });
+  const {control, handleSubmit} = useForm();
 
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-  } = useForm();
-
-  console.log(errors);
-
-  const onButtonPressed = (data: any) => {
-    // console.log(data);
+  const onSubmit = (data: any) => {
+    console.log('Form Data:', data);
   };
+
   return (
-    <View style={{}}>
-      {/* <Controller
-        name="username"
-        control={control}
-        render={({field: {onChange, onBlur, value}}) => (
-          <TextInput
-            label="Username"
-            mode="outlined"
-            value={value}
-            // onChangeText={text => setForm({...form, username: text})}
-            onChangeText={onChange}
-            onBlur={onBlur}
-          />
-        )}
-      /> */}
+    <View style={styles.container}>
+      <View style={styles.formContainer}>
+        <Text style={styles.title}>Login</Text>
 
-      {/* <TextInput
-        label="Password"
-        mode="outlined"
-        secureTextEntry
-        value={form.password}
-        onChangeText={text => setForm({...form, password: text})}
-      /> */}
-      <CustomInput
-        control={control}
-        name="username"
-        placeholder="username"
-        rules={{required: 'Username is required'}}
-      />
-      <CustomInput
-        control={control}
-        name="password"
-        secureTextEntry
-        placeholder="password"
-        rules={{
-          required: 'Password is required',
-          minLength: {
-            value: 6,
-            message: 'Password must be at least 6 characters',
-          },
-        }}
-      />
+        <CustomInput
+          control={control}
+          name="username"
+          placeholder="Username"
+          rules={{required: 'Username is required'}}
+        />
+        <CustomInput
+          control={control}
+          name="password"
+          secureTextEntry
+          placeholder="Password"
+          rules={{
+            required: 'Password is required',
+            minLength: {
+              value: 6,
+              message: 'Password must be at least 6 characters',
+            },
+          }}
+        />
 
-      <Button children="Press me" onPress={handleSubmit(onButtonPressed)} />
+        <Button
+          mode="contained"
+          onPress={handleSubmit(onSubmit)}
+          style={styles.button}
+          contentStyle={styles.buttonContent}>
+          Login
+        </Button>
+      </View>
     </View>
   );
 };
 
 export default LoginScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'red',
+  },
+  formContainer: {
+    width: '100%',
+    maxWidth: 360,
+    padding: 24,
+    backgroundColor: '#d9d7d7',
+    borderRadius: 8,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 32,
+    alignSelf: 'center',
+  },
+  button: {
+    marginTop: 24,
+    borderRadius: 4,
+  },
+  buttonContent: {
+    paddingVertical: 8,
+  },
+});

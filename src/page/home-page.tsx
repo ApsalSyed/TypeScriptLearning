@@ -71,7 +71,7 @@ export default HomePage;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 50,
+    // padding: 50,
   },
   buttonStyle: {
     backgroundColor: 'red',
