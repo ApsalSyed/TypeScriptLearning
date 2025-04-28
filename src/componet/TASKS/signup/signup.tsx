@@ -5,7 +5,9 @@ import {useForm} from 'react-hook-form';
 import {Button, Card, Title} from 'react-native-paper';
 
 const Signup = () => {
-  const {control, handleSubmit} = useForm();
+  const {control, handleSubmit, watch} = useForm();
+
+  const password = watch('password');
 
   const onSubmit = (data: any) => {
     console.log('Form Data:', data);
@@ -41,6 +43,15 @@ const Signup = () => {
                 value: 6,
                 message: 'Password must be at least 6 characters',
               },
+            }}
+          />
+          <CustomInput
+            control={control}
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            rules={{
+              validate: (value: any) =>
+                value === password || "Password doesn't matched",
             }}
           />
 
