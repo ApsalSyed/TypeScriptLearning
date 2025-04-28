@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import CustomCounter from '../componet/custom-counter';
+import {StyleSheet} from 'react-native';
+import Signup from '../componet/TASKS/signup/signup';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const HomePage: React.FC = () => {
   const [count, setCount] = useState<number>(0);
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* <DetailAtom lable={123} desc={'asfvjha'} />
       <DetailAtom
         lable={'Name'}
@@ -21,7 +23,7 @@ const HomePage: React.FC = () => {
         textStyle={styles.textStyle}
       /> */}
       {/* <Counter /> */}
-      <CustomCounter
+      {/* <CustomCounter
         title={['+1', '+2', '-1', '-2', 'RESET']}
         count={count}
         noofButton={5}
@@ -32,8 +34,38 @@ const HomePage: React.FC = () => {
           () => setCount(count - 2),
           () => setCount(0),
         ]}
+      /> */}
+
+      {/* <UserCard age={20} name="Apsal" email="hello@gmail.com" showage={true} /> */}
+      {/* <TodoList /> */}
+      {/* <LoginForm /> */}
+      {/* <ProductList /> */}
+      {/* <ProductWithSearch /> */}
+
+      {/* <CustomInputField
+        label="Email"
+        value={email}
+        onChangeText={setEmail}
+        icon="email"
+        keyboardType="email-address"
+        required
+        isEmail
       />
-    </View>
+      <CustomInputField
+        label="Password"
+        value={password}
+        onChangeText={setPassword}
+        icon="lock"
+        secureTextEntry
+        required
+        minLength={6}
+      /> */}
+      {/* <InputCustom lable={'Email'} /> */}
+      {/* <View style={{flex: 1}}>
+        <LoginScreen />
+      </View> */}
+      <Signup />
+    </SafeAreaView>
   );
 };
 export default HomePage;
@@ -41,7 +73,7 @@ export default HomePage;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 50,
+    // padding: 50,
   },
   buttonStyle: {
     backgroundColor: 'red',
