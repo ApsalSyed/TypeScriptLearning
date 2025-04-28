@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
-import CustomInput from '../login/custom-input';
 import {useForm} from 'react-hook-form';
 import {Button, Card, Title} from 'react-native-paper';
+import CustomInput from '../componet/TASKS/login/custom-input';
 
 const Signup = () => {
   const {control, handleSubmit, watch} = useForm();
